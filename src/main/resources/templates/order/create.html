@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${order.id == null ? 'Створення замовлення' : 'Редагування замовлення'}"></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1 th:text="${order.id == null ? 'Створення замовлення' : 'Редагування замовлення'}"></h1>
+
+<form th:action="@{${order.id == null} ? '/orders/create' : '/orders/edit/' + order.id}" method="post" th:object="${order}">
+    <input type="hidden" th:field="*{id}">
+
+    <label for="title">Назва:</label>
+    <input type="text" id="title" th:field="*{title}" required>
+    <br>
+
+    <label for="description">Опис:</label>
+    <textarea id="description" th:field="*{description}" required></textarea>
+    <br>
+
+    <label for="customer">Замовник:</label>
+    <select id="customer" th:field="*{customer.id}" required>
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+    </select>
+    <br>
+
+    <label for="freelancer">Фрілансер:</label>
+    <select id="freelancer" th:field="*{freelancer.id}">
+        <option value="">(Не призначено)</option>
+        <option th:each="freelancer : ${freelancers}" th:value="${freelancer.id}" th:text="${freelancer.name}"></option>
+    </select>
+    <br>
+
+    <label for="status">Статус:</label>
+    <select id="status" th:field="*{status}">
+        <option th:each="s : ${T(com.Radjapov.freelance.Models.Order.Status).values()}" th:value="${s}" th:text="${s}"></option>
+    </select>
+    <br>
+
+    <button type="submit">Зберегти</button>
+    <a href="/orders">Скасувати</a>
+
+    <!-- Покажіть помилку, якщо є -->
+    <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+</form>
+
+</body>
+</html>

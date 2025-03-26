@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Додати фрілансера</title>
+</head>
+<body>
+<h2>Додати фрілансера</h2>
+<form action="#" th:action="@{/freelancers/create}" th:object="${freelancer}" method="post">
+    <label>Ім'я:</label>
+    <input type="text" th:field="*{name}" required>
+    <br>
+    <label>Спеціалізація:</label>
+    <input type="text" th:field="*{specialization}" required>
+    <br>
+    <label>Логін:</label>
+    <input type="text" th:field="*{user.username}" required>
+    <br>
+    <label>Пароль:</label>
+    <input type="password" th:field="*{user.password}" required>
+    <br>
+    <input type="hidden" th:field="*{user.role}" value="FREELANCER">
+    <br>
+    <button type="submit">Зберегти</button>
+</form>
+<a href="/freelancers">Назад</a>
+</body>
+</html>

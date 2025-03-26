@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список замовлень</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Список замовлень</h1>
+
+<a href="/orders/create">Створити нове замовлення</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>Опис</th>
+        <th>Замовник</th>
+        <th>Фрілансер</th>
+        <th>Статус</th>
+        <th>Дії</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.title}"></td>
+        <td th:text="${order.description}"></td>
+        <td th:text="${order.customer.username}"></td>
+        <td th:text="${order.freelancer != null ? order.freelancer.name : 'Не призначено'}"></td>
+        <td th:text="${order.status}"></td>
+        <td>
+            <a th:href="@{/orders/edit/{id}(id=${order.id})}">Редагувати</a> |
+            <a th:href="@{/orders/delete/{id}(id=${order.id})}" onclick="return confirm('Ви впевнені?')">Видалити</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

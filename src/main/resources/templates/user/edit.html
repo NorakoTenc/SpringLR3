@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагувати користувача</title>
+</head>
+<body>
+<h2>Редагувати користувача</h2>
+<form action="#" th:action="@{/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <label>Логін:</label>
+    <input type="text" th:field="*{username}" required>
+    <br>
+    <label>Пароль:</label>
+    <input type="password" th:field="*{password}" required>
+    <br>
+    <label>Роль:</label>
+    <select th:field="*{role}">
+        <option th:each="role : ${T(com.Radjapov.freelance.Models.User.Role).values()}"
+                th:value="${role}" th:text="${role}"></option>
+    </select>
+    <br>
+    <button type="submit">Оновити</button>
+</form>
+<a href="/users">Назад</a>
+</body>
+</html>

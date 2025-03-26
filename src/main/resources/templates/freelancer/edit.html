@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагувати фрілансера</title>
+</head>
+<body>
+<h2>Редагувати фрілансера</h2>
+<form action="#" th:action="@{/freelancers/edit/{id}(id=${freelancer.id})}" th:object="${freelancer}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <label>Ім'я:</label>
+    <input type="text" th:field="*{name}" required>
+    <br>
+    <label>Спеціалізація:</label>
+    <input type="text" th:field="*{specialization}" required>
+    <br>
+    <button type="submit">Оновити</button>
+</form>
+<a href="/freelancers">Назад</a>
+</body>
+</html>

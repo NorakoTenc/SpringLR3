@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список користувачів</title>
+</head>
+<body>
+<h2>Список користувачів</h2>
+<a href="/users/register">Додати користувача</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Логін</th>
+        <th>Роль</th>
+        <th>Дії</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role}"></td>
+        <td>
+            <a th:href="@{/users/edit/{id}(id=${user.id})}">Редагувати</a> |
+            <a th:href="@{/users/delete/{id}(id=${user.id})}">Видалити</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

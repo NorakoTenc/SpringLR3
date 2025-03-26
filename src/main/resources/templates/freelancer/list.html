@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список фрілансерів</title>
+</head>
+<body>
+<h2>Список фрілансерів</h2>
+<a href="/freelancers/create">Додати фрілансера</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Ім'я</th>
+        <th>Спеціалізація</th>
+        <th>Дії</th>
+    </tr>
+    <tr th:each="freelancer : ${freelancers}">
+        <td th:text="${freelancer.id}"></td>
+        <td th:text="${freelancer.name}"></td>
+        <td th:text="${freelancer.specialization}"></td>
+        <td>
+            <a th:href="@{/freelancers/edit/{id}(id=${freelancer.id})}">Редагувати</a> |
+            <a th:href="@{/freelancers/delete/{id}(id=${freelancer.id})}">Видалити</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
