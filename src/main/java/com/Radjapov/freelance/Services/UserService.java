@@ -24,22 +24,16 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        // Якщо роль користувача - фрілансер, створюємо фрілансера
         if (user.getRole() == User.Role.FREELANCER) {
-            // Зберігаємо користувача
             User savedUser = userRepository.save(user);
-
-            // Створюємо об'єкт фрілансера та прив'язуємо до нього збереженого користувача
             Freelancer freelancer = new Freelancer();
             freelancer.setUser(savedUser);
-            freelancer.setName(savedUser.getUsername());  // Ім'я фрілансера = username користувача
+            freelancer.setName(savedUser.getUsername());
 
-            // Викликаємо метод сервісу фрілансера для збереження фрілансера
             freelancerService.saveFreelancer(freelancer, savedUser);
 
             return savedUser;
         } else {
-            // Якщо це не фрілансер, просто зберігаємо юзера без фрілансера
             return userRepository.save(user);
         }
     }
